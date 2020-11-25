@@ -15,17 +15,18 @@ data = {int(key): {int(sub_key): data[key][sub_key]
 edge_list = [(key, sub_key, data[key][sub_key]) for key in data.keys()
              for sub_key in data[key].keys() if sub_key > key]
 
+# create directed graph
 G.add_weighted_edges_from(edge_list)
 
-# クラスタリング
+# implement of Clustering
 partition = community.best_partition(G, weight='weight')
 
-# コミュニティごとに頂点を分けてリスト生成
+# List the vertices separately for each community
 part_com = [[] for _ in set(list(partition.values()))]
 for key in partition.keys():
     part_com[partition[key]].append(key)
 
-# 各コミュニティごとに媒介中心性の最大値およびその頂点を求める
+# List the vertices separately for each community by betweeness centrarlity
 for part in part_com:
     G_part = nx.Graph()
     for edge in edge_list:
