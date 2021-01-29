@@ -4,7 +4,6 @@ import matplotlib.pyplot as plt
 import json
 import community
 
-
 G = nx.Graph()
 
 f = open('./data/my_sample_data.json')
